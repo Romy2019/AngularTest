@@ -3,16 +3,21 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
+import {HomeComponent} from './component/home/home.component';
+import { AppRoutingModule } from './app-routing.module';
+import { ListComponent } from './component/list/list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    
+    HomeComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
