@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
     this.registrationForm = this.fb.group({
       userName: ['', [Validators.required, Validators.minLength(3)]],
       password: ['',[Validators.required, Validators.minLength(8)]],
-      confirmPassword: [''],
+      confirmPassword: ['',],
       email: [''],
       subscribe: [false],
       address: this.fb.group({
@@ -36,9 +36,16 @@ export class AppComponent implements OnInit {
     return this.registrationForm.get('userName');
   }
 
+  get password() {
+    return this.registrationForm.get('password');
+  }
   get email() {
     return this.registrationForm.get('email');
   }
+  get city() {
+    return this.registrationForm.get('city');
+  }
+
 
   get alternateEmails() {
     return this.registrationForm.get('alternateEmails') as FormArray;
