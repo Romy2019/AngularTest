@@ -12,22 +12,13 @@ import { RegistrationService } from './registration.service';
 export class AppComponent implements OnInit {
 
   registrationForm: FormGroup;
-  // registrationForm = new FormGroup({
-  //   userName: new FormControl('Vishwas'),
-  //   password: new FormControl(''),
-  //   confirmPassword: new FormControl(''),
-  //   address: new FormGroup({
-  //     city: new FormControl(''),
-  //     state: new FormControl(''),
-  //     postalCode: new FormControl('')
-  //   })
-  // });
+
   constructor(private fb: FormBuilder, private _registrationService: RegistrationService) { }
 
   ngOnInit() {
     this.registrationForm = this.fb.group({
       userName: ['', [Validators.required, Validators.minLength(3)]],
-      password: [''],
+      password: ['',[Validators.required, Validators.minLength(8)]],
       confirmPassword: [''],
       email: [''],
       subscribe: [false],
@@ -39,16 +30,6 @@ export class AppComponent implements OnInit {
       alternateEmails: this.fb.array([])
     }, { validator: PasswordValidator });
 
-    this.registrationForm.get('subscribe').valueChanges
-      .subscribe(checkedValue => {
-        const email = this.registrationForm.get('email');
-        if (checkedValue) {
-          email.setValidators(Validators.required);
-        } else {
-          email.clearValidators();
-        }
-        email.updateValueAndValidity();
-      });
   }
 
   get userName() {
@@ -65,25 +46,6 @@ export class AppComponent implements OnInit {
 
   addAlternateEmail() {
     this.alternateEmails.push(this.fb.control(''));
-  }
-
-  loadAPIData() {
-    // this.registrationForm.setValue({
-    //   userName: 'Bruce',
-    //   password: 'test',
-    //   confirmPassword: 'test',
-    //   address: {
-    //     city: 'City',
-    //     state: 'State',
-    //     postalCode: '123456'
-    //   }
-    // });
-
-    this.registrationForm.patchValue({
-      userName: 'Bruce',
-      password: 'test',
-      confirmPassword: 'test'
-    });
   }
 
   onSubmit() {
